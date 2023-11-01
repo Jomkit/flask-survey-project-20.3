@@ -45,16 +45,20 @@ def get_question(id):
     
     qid = int(id)
     question = target_survey.questions[qid].question
+    allow_comments = target_survey.questions[qid].allow_text
     choices = target_survey.questions[qid].choices
-    return render_template('questions.html',id=qid, question=question, choices=choices)
+    return render_template('questions.html',id=qid, question=question, allow_comments=allow_comments, choices=choices)
 
 @app.route('/answer', methods=['post'])
 def show_answer():
     """Get answer from previous questions form
       should redirect to next question. If all questions answered, 
       should redirect to a thank you page"""
+
     ans = request.form['choices']
-    responses.append(ans)
+    comments = request.form.get('comments','')
+    responses.append({'answer':ans, 'comment':comments})
+            
     id = len(responses)
     if id >= len(target_survey.questions):
         return redirect('/thank_you')
@@ -63,6 +67,7 @@ def show_answer():
     
 @app.route('/thank_you')
 def thank_you():
+    """Thank you page, displays questions and the user's responses"""
     questions = target_survey.questions
     length = range(len(questions))
     return render_template('thank_you.html', questions=questions, responses=responses, range=length)

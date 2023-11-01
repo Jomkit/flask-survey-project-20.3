@@ -15,9 +15,15 @@
             <input type="radio" name="choices" id="{{choice}}" value="{{choice}}">
             <label for="{{choice}}">{{choice}}</label>
             {% endfor %}
+
+            {% if allow_comments %}
+            <br>
+            <label for="comments">Additional Comments</label>
+            <input type="text" name="comments" id="comments">
+            {% endif %}
         </div>
         <div>
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit">Submit</button>
         </div>
     </fieldset>
     
