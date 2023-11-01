@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Thank You Page{% endblock %}
+
+{% block content %}
+    <h1>Thank You for Answering Our Survey!!</h1>
+    <div class="answer-list">
+        <ul>
+        {% for i in range %}
+        <li><b>{{ questions[i].question }}</b> {{ responses[i] }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    
+{% endblock %}

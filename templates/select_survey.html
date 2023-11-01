@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Select Survey{% endblock %}
+
+{% block content %}
+<h1>Flask Survey App</h1>
+<p>Welcome to the Flask Survey App!</p>
+
+<form action="/select_survey" method="post">
+    <fieldset>
+        <legend>Pick your Survey</legend>
+        <div>
+            {% for choice in choices %}
+            <input type="radio" name="choices" id="{{choice}}" value="{{choice}}">
+            <label for="{{choice}}">{{choice}}</label>
+            {% endfor %}
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </fieldset>
+    
+</form>
+
+{% endblock %}

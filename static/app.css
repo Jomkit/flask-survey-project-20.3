@@ -1,0 +1,37 @@
+/* survey start button */
+main {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: none;
+    margin: none;
+}
+.answer-list {
+    display: block;
+    padding: none;
+    margin: auto;
+    text-align: left;
+    border: 1px solid black;
+    
+    
+}
+#start-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.messages p {
+    max-width: 50%;
+    margin: auto;
+    padding: 1rem;
+    font-size: 1rem;
+    box-shadow: 0 3px 5px rgba(0,0,0,.2);
+}
+.messages .info {
+    background-color: rgba(0,0,255, 0.1);
+}
