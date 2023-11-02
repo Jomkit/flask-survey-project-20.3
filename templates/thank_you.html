@@ -4,12 +4,15 @@
 
 {% block content %}
     <h1>Thank You for Answering Our Survey!!</h1>
-    <div class="answer-list">
-        <ul>
+    <div class="rounded p-2">
+        <ul class="list-group list">
         {% for i in range %}
-        <li><b>{{ questions[i].question }}</b> {{ session['responses'][i]['answer'] }} <i>{{session['responses'][i]['comment']}}</i></li>
+        <li class="list-group-item"><b>{{ questions[i].question }}</b> {{ session['responses'][i]['answer'] }} <i>{{session['responses'][i]['comment']}}</i></li>
         {% endfor %}
     </ul>
     </div>
-<a href="/" class="blue-btn">Return Home</a>
+<a href="/" class="btn btn-primary my-2">Return Home</a>
+
+<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+<div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
 {% endblock %}
