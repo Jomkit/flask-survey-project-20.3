@@ -58,7 +58,7 @@ def show_answer():
     comments = request.form.get('comments','')
     responses = session['responses']
     responses.append({'answer':ans, 'comment':comments})
-    session['responses']        
+    session['responses'] = responses
     
     id = len(responses)
     if id >= len(target_survey.questions):
