@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import surveys
 
@@ -9,7 +9,6 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 #Store user answers here
-responses = []
 
 @app.route('/')
 def show_select_survey():
@@ -21,14 +20,14 @@ def show_select_survey():
 def select_survey():
     """select_survey() gets the chosen survey from select_survey.html, 
        and sets it to the global variable target_survey"""
-
+    session['responses'] = []
     global target_survey
     target_survey = surveys[request.form['choices']]
     return redirect('/home')
 
 @app.route('/home')
 def homepage():
-    """Homepage for Shop Surveys"""
+    """Homepage for Shop Surveys, start survey from here"""
     survey = target_survey
     return render_template('home.html', survey=survey)
 
@@ -38,7 +37,7 @@ def get_question(id):
        if user tries to enter custom url to go to a question out
        of order, redirect to the next question in the original 
        sequential order"""
-
+    responses = session['responses']
     if not int(id) == len(responses):
         flash('Attempting to access invalid question, redirecting to next question in order', 'info')
         return redirect(url_for('get_question',id=len(responses)))
@@ -57,8 +56,10 @@ def show_answer():
 
     ans = request.form['choices']
     comments = request.form.get('comments','')
+    responses = session['responses']
     responses.append({'answer':ans, 'comment':comments})
-            
+    session['responses']        
+    
     id = len(responses)
     if id >= len(target_survey.questions):
         return redirect('/thank_you')
@@ -69,5 +70,6 @@ def show_answer():
 def thank_you():
     """Thank you page, displays questions and the user's responses"""
     questions = target_survey.questions
+    responses = session['responses']
     length = range(len(questions))
     return render_template('thank_you.html', questions=questions, responses=responses, range=length)
