@@ -8,7 +8,9 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
 
-#Store user answers here
+#global constants for cookie names for Flask Sessions
+RESPONSES = 'responses'
+TARGET_SURVEY = 'target_survey'
 
 @app.route('/')
 def show_select_survey():
@@ -20,7 +22,8 @@ def show_select_survey():
 def select_survey():
     """select_survey() gets the chosen survey from select_survey.html, 
        and sets it to the global variable target_survey"""
-    session['responses'] = []
+    session[RESPONSES] = []
+    
     global target_survey
     target_survey = surveys[request.form['choices']]
     return redirect('/home')
@@ -37,7 +40,7 @@ def get_question(id):
        if user tries to enter custom url to go to a question out
        of order, redirect to the next question in the original 
        sequential order"""
-    responses = session['responses']
+    responses = session[RESPONSES]
     if not int(id) == len(responses):
         flash('Attempting to access invalid question, redirecting to next question in order', 'info')
         return redirect(url_for('get_question',id=len(responses)))
@@ -56,9 +59,9 @@ def show_answer():
 
     ans = request.form['choices']
     comments = request.form.get('comments','')
-    responses = session['responses']
+    responses = session[RESPONSES]
     responses.append({'answer':ans, 'comment':comments})
-    session['responses'] = responses
+    session[RESPONSES] = responses
     
     id = len(responses)
     if id >= len(target_survey.questions):
@@ -70,6 +73,5 @@ def show_answer():
 def thank_you():
     """Thank you page, displays questions and the user's responses"""
     questions = target_survey.questions
-    responses = session['responses']
     length = range(len(questions))
-    return render_template('thank_you.html', questions=questions, responses=responses, range=length)
+    return render_template('thank_you.html', questions=questions, range=length)

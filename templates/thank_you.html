@@ -7,7 +7,7 @@
     <div class="answer-list">
         <ul>
         {% for i in range %}
-        <li><b>{{ questions[i].question }}</b> {{ responses[i]['answer'] }} <i>{{responses[i]['comment']}}</i></li>
+        <li><b>{{ questions[i].question }}</b> {{ session['responses'][i]['answer'] }} <i>{{session['responses'][i]['comment']}}</i></li>
         {% endfor %}
     </ul>
     </div>
