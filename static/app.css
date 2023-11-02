@@ -11,13 +11,12 @@ ul {
 .answer-list {
     display: block;
     padding: none;
-    margin: auto;
+    margin: 25px 20%;
     text-align: left;
     border: 1px solid black;
-    
-    
 }
-#start-btn {
+
+.blue-btn {
     background-color: blue;
     color: white;
     padding: 10px 25px;
