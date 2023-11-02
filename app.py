@@ -46,10 +46,11 @@ def get_question(id):
         return redirect(url_for('get_question',id=len(responses)))
     
     qid = int(id)
+    p_bar = qid / len(target_survey.questions) * 100
     question = target_survey.questions[qid].question
     allow_comments = target_survey.questions[qid].allow_text
     choices = target_survey.questions[qid].choices
-    return render_template('questions.html',id=qid, question=question, allow_comments=allow_comments, choices=choices)
+    return render_template('questions.html',id=qid, p_bar=p_bar, question=question, allow_comments=allow_comments, choices=choices)
 
 @app.route('/answer', methods=['post'])
 def show_answer():

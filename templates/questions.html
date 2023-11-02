@@ -3,6 +3,9 @@
 {% block title %}Question {{id + 1}}{% endblock %}
 
 {% block content %}
+
+
+
 <h1 class="display-4">Question {{id + 1}}</h1>
 
 <form action="/answer" method="post">
@@ -18,14 +21,18 @@
         {% endfor %}
 
         {% if allow_comments %}
-        
+        <br>
         <label for="comments">Additional Comments</label>
         <input type="text" name="comments" id="comments">
         {% endif %}
     </div>
     <div> 
-        <button type="submit" class="btn btn-success q-submit mt-2 px-5">Submit</button>
+        <button type="submit" class="btn btn-success q-submit my-2 px-5">Submit</button>
     </div>
     
 </form>
+
+<!-- progress bar -->
+<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+<div class="progress-bar progress-bar-striped progress-bar-animated" style="width: {{ p_bar }}%"></div>
 {% endblock %}
