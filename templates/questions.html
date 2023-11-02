@@ -3,29 +3,29 @@
 {% block title %}Question {{id + 1}}{% endblock %}
 
 {% block content %}
-<h1>Question {{id + 1}}</h1>
+<h1 class="display-4">Question {{id + 1}}</h1>
 
 <form action="/answer" method="post">
     <label for="question-{{id + 1}}">{{question}}</label>
+    <hr class="my-4">
 
-    <fieldset>
-        <legend>Choices</legend>
-        <div>
-            {% for choice in choices %}
-            <input type="radio" name="choices" id="{{choice}}" value="{{choice}}">
+    <div>
+        {% for choice in choices %}
+        <div class="form-check form-check-inline">
+            <input type="radio" name="choices" class="choices" id="{{choice}}" value="{{choice}}" required>
             <label for="{{choice}}">{{choice}}</label>
-            {% endfor %}
+        </div>
+        {% endfor %}
 
-            {% if allow_comments %}
-            <br>
-            <label for="comments">Additional Comments</label>
-            <input type="text" name="comments" id="comments">
-            {% endif %}
-        </div>
-        <div>
-            <button type="submit" class="submit">Submit</button>
-        </div>
-    </fieldset>
+        {% if allow_comments %}
+        
+        <label for="comments">Additional Comments</label>
+        <input type="text" name="comments" id="comments">
+        {% endif %}
+    </div>
+    <div> 
+        <button type="submit" class="btn btn-success q-submit mt-2 px-5">Submit</button>
+    </div>
     
 </form>
 {% endblock %}

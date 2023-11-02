@@ -2,20 +2,20 @@
 {% block title %}Select Survey{% endblock %}
 
 {% block content %}
-<h1>Flask Survey App</h1>
-<p>Welcome to the Flask Survey App!</p>
-
+<h1 class="display-1">Flask Survey App</h1>
+<p class="lead">Welcome to the Flask Survey App!</p>
+<hr class="mx-4">   
 <form action="/select_survey" method="post">
     <fieldset>
-        <legend>Pick your Survey</legend>
-        <div>
+        <h2 class="display-5">Pick Your Survey</h1>
+        <div class="form-check form-check-inline mb-3">
             {% for choice in choices %}
             <input type="radio" name="choices" id="{{choice}}" value="{{choice}}">
             <label for="{{choice}}">{{choice}}</label>
             {% endfor %}
         </div>
         <div>
-            <button type="submit" class="submit">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </fieldset>
     
